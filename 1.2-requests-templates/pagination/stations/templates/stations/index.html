@@ -19,28 +19,29 @@
     <link rel="stylesheet" href="{% static "css/normalize.css" %}">
     <link rel="stylesheet" href="{% static "css/skeleton.css" %}">
 </head>
-<body>
+<body>  
 <div class="container">
     <div class="row">
-        <table class="u-full-width">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Street</th>
-                <th>District</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for station in bus_stations %}
+            <table class="u-full-width">
+                <thead>
                 <tr>
-                    <td>{{ station.Name }}</td>
-                    <td>{{ station.Street }}</td>
-                    <td>{{ station.District }}</td>
+                    <th>Name</th>
+                    <th>Street</th>
+                    <th>District</th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
 
+                {% for station in bus_stations %}
+                    <tr>
+                        <td>{{ station.Name }}</td>
+                        <td>{{ station.Street }}</td>
+                        <td>{{ station.District }}</td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
         {% if page.has_previous %}
             <a class="button button-primary" href="?page={{ page.previous_page_number }}">⟵</a>
         {% endif %}

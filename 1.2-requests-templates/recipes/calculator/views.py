@@ -23,52 +23,12 @@ DATA = {
     }
 }
 
-def calculate_omlet(request):
+def dish_view(request, dish):
     servings = int(request.GET.get('servings', 1))
-    recipe = {}
-    for el in DATA.get('omlet').items():
-        recipe[el[0]] = el[1] * servings
-    context =    {
-        'name': 'Омлет',
-        'recipe': recipe,
-        'servings': servings
-    }
+    name = ''
+    if dish in DATA:
+        ingredients = {k: (v * servings) for k, v in DATA[dish].items()}
+        name = dish
+    context = {'recipe': ingredients,
+               'name': name}
     return render(request, 'calculator/index.html', context)
-
-def calculate_pasta(request):
-    servings = int(request.GET.get('servings', 1))
-    recipe = {}
-    for el in DATA.get('pasta').items():
-        recipe[el[0]] = el[1] * servings
-    context =    {
-        'name': 'Паста',
-        'recipe': recipe,
-        'servings': servings
-    }
-    return render(request, 'calculator/index.html', context)
-
-
-def calculate_buter(request):
-    servings = int(request.GET.get('servings', 1))
-    recipe = {}
-    for el in DATA.get('buter').items():
-        recipe[el[0]] = el[1] * servings
-    context =    {
-        'name': 'Бутерброд',
-        'recipe': recipe,
-        'servings': servings
-    }
-    return render(request, 'calculator/index.html', context)
-
-def calculate_strawberry_yoghurt(request):
-    servings = int(request.GET.get('servings', 1))
-    recipe = {}
-    for el in DATA.get('strawberry yoghurt').items():
-        recipe[el[0]] = el[1] * servings
-    context =    {
-        'name': 'Клубничный йогурт',
-        'recipe': recipe,
-        'servings': servings
-    }
-    return render(request, 'calculator/index.html', context)
-

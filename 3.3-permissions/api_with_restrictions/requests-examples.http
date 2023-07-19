@@ -15,7 +15,8 @@ Authorization: Token ab0bc5cdbe471f6221f6c6c1381ef6a1fca099a1
 
 {
   "title": "Шкаф IKEA",
-  "description": "Срочно"
+  "description": "Срочно",
+  "status": "CLOSED"
 }
 
 ###

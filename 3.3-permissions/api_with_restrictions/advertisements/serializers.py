@@ -35,7 +35,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 
         creator = self.context['request'].user
         counter = Advertisement.objects.filter(creator=creator, status='OPEN').count()
-        if counter >= 10:
+        if counter >= 10 or data.get('status') != 'CLOSED':
             raise serializers.ValidationError('Создание и обновление объявления невозможно.\n'
                                                'У пользователя больше 10 открытых объвлений')
 

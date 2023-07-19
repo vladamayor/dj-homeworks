@@ -4,6 +4,7 @@ from advertisements.models import Advertisement
 from advertisements.permissions import IsOwnerOrReadOnly
 from advertisements.serializers import AdvertisementSerializer
 from advertisements.filters import AdvertisementFilter
+from django_filters import rest_framework as filters
 
 
 class AdvertisementViewSet(ModelViewSet):
@@ -12,19 +13,8 @@ class AdvertisementViewSet(ModelViewSet):
     serializer_class = AdvertisementSerializer
     filterset_class = AdvertisementFilter
     queryset = Advertisement.objects.all()
-
-    def get_queryset(self):
-        queryset = self.queryset
-        search = self.request.GET
-        if search:
-            if search.get('status'):
-                queryset = queryset.filter(status = search.get('status'))
-            elif search.get('created_at_after'):
-                queryset = queryset.filter(created_at__gte = search.get('created_at_after'))
-            else:
-                queryset = queryset.filter(created_at__lte = search.get('created_at_before'))
-
-        return queryset
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = AdvertisementFilter
 
     def get_permissions(self):
         """Получение прав для действий."""
